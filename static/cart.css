@@ -1,0 +1,33 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.cart {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.cart th, .cart td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.cart th {
+    background-color: #f2f2f2;
+}
+
+.cart tfoot {
+    font-weight: bold;
+}
+
+.cart tfoot td

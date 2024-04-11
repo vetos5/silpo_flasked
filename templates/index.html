@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <h1>Online Store</h1>
+    <div class="products">
+        {% for product in products %}
+            <div class="product">
+                <h2>{{ product.name }}</h2>
+                <p>${{ product.price }}</p>
+                <a href="/add_to_cart/{{ product.id }}">Add to Cart</a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="/cart">View Cart</a>
+</body>
+</html>
