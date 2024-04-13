@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Store</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <title>Products</title>
+        <style>
+        img {
+            max-width: 200px; /* Adjust the maximum width of the image */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Online Store</h1>
-    <div class="products">
+    <h1>Products</h1>
+    <ul>
         {% for product in products %}
-            <div class="product">
-                <h2>{{ product.name }}</h2>
-                <p>${{ product.price }}</p>
-                <a href="/add_to_cart/{{ product.id }}">Add to Cart</a>
-            </div>
+        <li>
+            <h2>{{ product.name }}</h2>
+            <p>Price: {{ product.price }}</p>
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        </li>
         {% endfor %}
-    </div>
-    <a href="/cart">View Cart</a>
+    </ul>
 </body>
 </html>

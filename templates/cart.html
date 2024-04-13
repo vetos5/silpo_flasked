@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
+    <title>Кошик</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .checkout-btn {
+            background-color: #28a745;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Shopping Cart</h1>
-    <table class="cart">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in cart_products %}
-                <tr>
-                    <td>{{ product.name }}</td>
-                    <td>${{ product.price }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>Total:</td>
-                <td>${{ total_price }}</td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="header">Кошик</div>
+    <div class="cart-items">
+        <!-- Сюди будуть додаватись товари з корзини -->
+    </div>
+    <button class="checkout-btn" onclick="location.href='/checkout'">Оформити замовлення</button>
 </body>
+
 </html>
