@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:silpo1@localhost/silpo'
 db = SQLAlchemy(app)
-
 shopping_cart = []
 
 
@@ -21,11 +20,6 @@ class Product(db.Model):
         self.quantity = quantity
         self.image_url = image_url
 
-
-##with app.app_context():
-  ##  product = Product(name='Sweet potato', price=13.90, quantity=30, image_url='https://images.silpo.ua/products/1600x1600/2b45e359-dde6-4719-b6fa-4f58ba0807d4.png')
-    ##db.session.add(product)
-    ##db.session.commit()
 
 
 @app.route('/')
@@ -52,6 +46,13 @@ def cart():
     total = sum(item['price'] * item['quantity'] for item in shopping_cart)
     total = format(total, '.2f')
     return render_template('cart.html', cart=shopping_cart, total=total)
+
+
+@app.route('/clear_cart', methods=['POST'])
+def clear_cart():
+    global shopping_cart
+    shopping_cart = []
+    return redirect(url_for('cart'))
 
 
 if __name__ == '__main__':

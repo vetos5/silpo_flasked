@@ -20,13 +20,19 @@
             <td>${{ item.price }}</td>
             <td>{{ item.quantity }}</td>
             <td>${{ '%.2f' | format(item.price * item.quantity) }}</td>
+
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="3"><strong>Total:</strong></td>
+            <td colspan="3"><strong>Whole cart total:</strong></td>
             <td>${{ total }}</td>
         </tr>
     </table>
+
+    <form action="{{ url_for('clear_cart') }}" method="post">
+        <button type="submit">Clear Cart</button>
+    </form>
+
     <form action="{{ url_for('index') }}">
         <button type="submit">Continue shopping</button>
     </form>
