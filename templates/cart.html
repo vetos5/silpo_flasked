@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
+    <title>Кошик - Онлайн магазин СІЛЬПО</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cart-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .product {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .product img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Shopping Cart</h1>
-    <table class="cart">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in cart_products %}
-                <tr>
-                    <td>{{ product.name }}</td>
-                    <td>${{ product.price }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>Total:</td>
-                <td>${{ total_price }}</td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="header">Кошик - Онлайн магазин СІЛЬПО</div>
+    <div class="cart-container">
+
+  
+  
+  
+  </div>
+
 </body>
 </html>
