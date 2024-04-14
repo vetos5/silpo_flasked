@@ -1,43 +1,59 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = 'secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:silpo1@localhost/silpo'
+db = SQLAlchemy(app)
+shopping_cart = []
 
 
-products = [
-    {"id": 1, "name": "Revo", "price": 24},
-    {"id": 2, "name": "Pivo", "price": 1488},
-    {"id": 3, "name": "Elda", "price": 0.01}
-]
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    image_url = db.Column(db.String(100), nullable=False)
+
+    def __init__(self, name, price, quantity, image_url):
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.image_url = image_url
+
+
 
 @app.route('/')
 def index():
+    products = Product.query.all()
     return render_template('index.html', products=products)
 
-@app.route('/add_to_cart/<int:product_id>')
-def add_to_cart(product_id):
-    if 'cart' not in session:
-        session['cart'] = []
 
-    # Check if the product is already in the cart
-    if product_id not in session['cart']:
-        session['cart'].append(product_id)
-
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    product_id = request.form['product_id']
+    product = Product.query.get(product_id)
+    if product:
+        cart_item = next((item for item in shopping_cart if item['id'] == product.id), None)
+        if cart_item:
+            cart_item['quantity'] += 1
+        else:
+            shopping_cart.append({'id': product.id, 'name': product.name, 'price': product.price, 'quantity': 1})
     return redirect(url_for('index'))
 
 
-@app.route('/remove_from_cart/<int:product_id>')
-def remove_from_cart(product_id):
-    if 'cart' in session and product_id in session['cart']:
-        session['cart'].remove(product_id)
-
-    return redirect(url_for('cart'))
-
 @app.route('/cart')
 def cart():
-    cart_products = [product for product in products if product['id'] in session.get('cart', [])]
-    total_price = sum(product['price'] for product in cart_products)
-    return render_template('cart.html', cart_products=cart_products, total_price=total_price)
+    total = sum(item['price'] * item['quantity'] for item in shopping_cart)
+    total = format(total, '.2f')
+    return render_template('cart.html', cart=shopping_cart, total=total)
+
+
+@app.route('/clear_cart', methods=['POST'])
+def clear_cart():
+    global shopping_cart
+    shopping_cart = []
+    return redirect(url_for('cart'))
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

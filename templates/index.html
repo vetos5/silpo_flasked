@@ -1,105 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн магазин СІЛЬПО</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Products</title>
+        <style>
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+
 </head>
-
 <body>
-    <div class="header">Онлайн магазин СІЛЬПО</div>
+    <h1>Products</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <h2>{{ product.name }}</h2>
+            <p>Price: {{ product.price }}</p>
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
+            <form action="{{ url_for('add_to_cart') }}" method="post">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit">Add to Cart</button>
+            </form>
 
-    <div class="cart-link">
-        <a href="cart.html">Перейти до кошика</a>
-    </div>
-
-    <div class="products-container">
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/7774efde-6f1a-4ea6-821f-1ecb3b4d34fb.png" width="162" height="162">
-            <h3>Апельсин</h3>
-            <p><span class="product-code">Код товару: CODE001</span></p>
-            <p>Ціна: ₴8.90</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/59705cdf-3f83-4306-99a3-a795c35e4e68.png" width="162" height="162">
-            <h3>Лохина</h3>
-            <p><span class="product-code">Код товару: CODE002</span></p>
-            <p>Ціна: ₴148.72</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/2b45e359-dde6-4719-b6fa-4f58ba0807d4.png" width="162" height="162">
-            <h3>Батат</h3>
-            <p><span class="product-code">Код товару: CODE003</span></p>
-            <p>Ціна: ₴13.90</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/2ec02e2d-39ae-47b5-930b-a29cc8e93e6a.png" width="162" height="162">
-            <h3>Полуниця</h3>
-            <p><span class="product-code">Код товару: CODE004</span></p>
-            <p>Ціна: ₴39.90</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/ac8a8508-3e0d-4125-a3b3-c7599b2798d2.png" width="162" height="162">
-            <h3>Куряче філе</h3>
-            <p><span class="product-code">Код товару: CODE005</span></p>
-            <p>Ціна: ₴16.70</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/bd36635e-e16d-4e4e-84ff-ad91725000a8.png" width="162" height="162">
-            <h3>Сир Брі</h3>
-            <p><span class="product-code">Код товару: CODE006</span></p>
-            <p>Ціна: ₴89.90</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/9b5a5688-b69e-4381-9d3f-baaeeed802b2.png" width="162" height="162">
-            <h3>Круасан</h3>
-            <p><span class="product-code">Код товару: CODE007</span></p>
-            <p>Ціна: ₴44.99</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/8d0652fe-80e7-4a93-a7fa-e852b9512d0f.png" width="162" height="162">
-            <h3>Паска</h3>
-            <p><span class="product-code">Код товару: CODE008</span></p>
-            <p>Ціна: ₴74.99</p>
-            <button>Додати до кошика</button>
-        </div>
-        <div class="product">
-            <img src="https://images.silpo.ua/products/1600x1600/fbc112af-f0b5-4190-854d-920cc6ecdbf0.png" width="162" height="162">
-            <h3>Актімель</h3>
-            <p><span class="product-code">Код товару: CODE009</span></p>
-            <p>Ціна: ₴22.99</p>
-            <button>Додати до кошика</button>
-        </div>
-       <div class="product"><img src="https://images.silpo.ua/products/1600x1600/3ddc2eb0-5a0e-4e31-93a5-3ffb8baac355.png" width="162" height="162">
-            <h3>Манго</h3>
-            <p><span class="product-code" style="display: none;">CODE008</span></p>
-            <p>Ціна: ₴68.99</p><button>Додати до кошика</button>
-        </div>
-        <div class="product"><img src="https://images.silpo.ua/products/1600x1600/f5214071-6d83-4de8-b655-b977809cf880.png" width="162" height="162">
-            <h3>Банан</h3>
-            <p><span class="product-code" style="display: none;">CODE009</span></p>
-            <p>Ціна: ₴6.99</p><button>Додати до кошика</button>
-        </div>
-        <div class="product"><img src="https://images.silpo.ua/products/1600x1600/8d43fb78-ea6f-4807-a7f2-6f396182df98.png" width="162" height="162">
-            <h3>Піца «Франческо», 500г</h3>
-            <p><span class="product-code" style="display: none;">CODE0010</span></p>
-            <p>Ціна: ₴139.00
-          </p><button>Додати до кошика</button>
-        </div>
-      
-    </div>
-
-
-
+        </li>
+        {% endfor %}
+    </ul>
+     <a href="{{ url_for('cart') }}"><button>Shopping cart</button></a>
 </body>
-
 </html>
