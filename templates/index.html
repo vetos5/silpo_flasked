@@ -76,8 +76,10 @@
             border-radius: 4px;
             margin-top: 10px;
         }
+        .product button:hover{
+            background-color: lightsalmon;
+        }
 
-        /* Cart Link */
         .cart-link {
             text-align: center;
             margin-top: 40px;
@@ -96,6 +98,35 @@
         .cart-link button:hover {
             background-color: #555;
         }
+
+        footer {
+            position : fixed;
+            margin-top: auto; /* Push footer to bottom */
+            text-align: center;
+            padding: 20px;
+            background-color: gray;
+            color: #fff;
+            width: 100%;
+        }
+
+        .footer-disclaimer {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .contact-links a {
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: #ff5733;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +144,7 @@
                 <p>Price: {{ product.price }}</p>
                 <form action="{{ url_for('add_to_cart') }}" method="post">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
-                    <button type="submit">Add to Cart</button>
+                    <button type="submit">BUY</button>
                 </form>
             </div>
             {% endfor %}
@@ -122,9 +153,19 @@
         <!-- Cart Link -->
         <div class="cart-link">
             <a href="{{ url_for('cart') }}">
-                <button>View Shopping Cart</button>
+                <button>VIEW CART</button>
             </a>
         </div>
     </div>
+
+        <footer>
+        <div class="contact-links">
+            <a href="https://open.spotify.com/album/5AZTosXwLrhoSZ2bUHf3Gw?si=MEgKpiMrRLO3May7K6pHSQ">Contact Us</a>
+            <a href="tel:+1234567890">Phone</a>
+            <a href="https://youtu.be/wg0G0FOoCI8?si=w8LcG5ozM8kL9ZK7">Other Contacts</a>
+        </div>
+        <p>© 2024 Store. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
