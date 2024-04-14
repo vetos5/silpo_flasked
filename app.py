@@ -21,7 +21,6 @@ class Product(db.Model):
         self.image_url = image_url
 
 
-
 @app.route('/')
 def index():
     products = Product.query.all()

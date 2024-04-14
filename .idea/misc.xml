@@ -3,5 +3,8 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.11 (flaskZilpo)" />
   </component>
+  <component name="ProjectResources">
+    <resource url="http://schemas.microsoft.com/office/word/2003/wordml" location="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (flaskZilpo)" project-jdk-type="Python SDK" />
 </project>
