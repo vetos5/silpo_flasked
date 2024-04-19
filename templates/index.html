@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,38 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Ensure full viewport height */
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 150px;
+        }
+
+        .cart-button {
+            display: flex;
+            align-items: center;
+            background-color: #ffb347;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-button img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .cart-button:hover {
+            background-color: #ffcc99;
         }
 
         h1 {
@@ -79,7 +111,7 @@
         }
 
         footer {
-            margin-top: auto; /* Push footer to bottom */
+            margin-top: auto;
             text-align: center;
             padding: 20px;
             background-color: #ffb347;
@@ -87,11 +119,24 @@
             width: 100%;
         }
 
-        .footer-disclaimer {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 20px;
-            color: #555;
+        <button onclick="scrollToTop()"id="scrollTopButton"title="Go to Top">↑</button>#scrollTopButton {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 20px;
+            background-color: #ffb347;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        #scrollTopButton:hover {
+            background-color: #ffcc99;
         }
 
         .contact-links a {
@@ -107,33 +152,47 @@
         }
     </style>
 </head>
+
 <body>
+    <script>
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+            var scrollTopButton = document.getElementById("scrollTopButton");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollTopButton.style.display = "block";
+            } else {
+                scrollTopButton.style.display = "none";
+            }
+        }
+        
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <header><img class="logo" src=".jpg" alt="Logo" style="margin: 0 auto 0 0; display: block; ">
+        <div class="cart-button"><img src=".jpg" alt="Cart" style="margin: 0 auto 0 0; display: block; "> <span>Cart</span></div>
+    </header>
     <h1>Products</h1>
     <ul>
-        {% for product in products %}
-        <li>
-            <img src="{{ product.image_url }}" alt="{{ product.name }}">
-            <h2>{{ product.name }}</h2>
-            <p>Price: {{ product.price }}</p>
-            <form action="{{ url_for('add_to_cart') }}" method="post">
-                <input type="hidden" name="product_id" value="{{ product.id }}">
-                <button type="submit">Add to Cart</button>
-              
-            </form>
+        <li>{% for category in categories %}<h2>{{ category.name }}</h2>
+            <ul>
+                <li>{% for product in category.products %}</li>
+                <li><img src="{{%20product.image_url%20}}" alt="{{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p>Price: {{ product.price }}₴</p>
+                    <form action="{{ url_for('add_to_cart') }}" method="post"><input type="hidden" name="product_id" value="{{ product.id }}"> <label for="quantity">Quantity:</label> <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.quantity }}" required="" data-mousedown="true"> <button type="submit">Add to Cart</button></form>
+                </li>
+                <li>{% endfor %}</li>
+            </ul>
         </li>
-        {% endfor %}
+        <li>{% endfor %}</li>
     </ul>
-  <a > <div class="cart-link"><a href="cart.html"><button>Cart</button></a></div> <br>
- 
     <footer>
-        <div class="contact-links">
-            <a href="https://open.spotify.com/album/5wpyvxIY9cMheAYPoj16m3?si=au1FsQFFTneJjvVNsoxpwQ">Contact Us</a>
-            <a href="tel:+1234567890">Phone</a>
-            <a href="https://youtu.be/wg0G0FOoCI8?si=w8LcG5ozM8kL9ZK7">Other Contacts</a>
-        </div>
-        <p>© 2024 Store. All rights reserved.</p>
+        <div class="contact-links"><a href="https://ab3.army">Contact Us</a> <a href="tel:+1234567890">Phone</a> <a href="https://youtu.be/wg0G0FOoCI8?si=w8LcG5ozM8kL9ZK7">Other Contacts</a></div>
+        <p>&copy; 2024 Store. All rights reserved.</p>
     </footer>
-
-
 </body>
+
 </html>
